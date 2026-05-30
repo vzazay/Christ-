@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Church Database Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <img id="siteLogo" src="logo.svg" alt="Christ Center Of Praise logo" />
+    <div class="brand">
+      <h1>Christ Center Of Praise Full Gospel Liberia Ministry</h1>
+      <p>Authorized login required for church member management.</p>
+    </div>
+  </header>
+
+  <!-- INTERFACE 1: LOGIN INTERFACE -->
+  <section class="interface" id="interface1Login">
+    <section class="panel login-panel" id="loginPanel">
+      <div class="form-title">
+        <h2>Login Dashboard</h2>
+        <p>Authorized access only. Enter your username and password to continue.</p>
+      </div>
+      <div class="auth-toggle">
+        <button type="button" id="showLoginButton" class="auth-toggle-button hidden">Back to login</button>
+        <button type="button" id="showRegisterButton" class="auth-toggle-button">Create new account</button>
+      </div>
+      <div id="loginFormContainer">
+        <form id="loginForm" autocomplete="off">
+          <div class="form-row">
+            <label for="loginUsername">Username</label>
+            <input type="text" id="loginUsername" placeholder="Enter username" required />
+          </div>
+          <div id="usernameInfo" class="login-info hidden"></div>
+          <div class="form-row">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter password" required />
+          </div>
+          <div class="form-row form-row-inline">
+            <label class="checkbox-label">
+              <input type="checkbox" id="showPasswordCheckbox" />
+              Show password
+            </label>
+          </div>
+          <div class="form-row forgot-row">
+            <a href="#" id="forgotPasswordLink" class="forgot-link">Forgot password?</a>
+          </div>
+          <div id="forgotMessage" class="login-info hidden"></div>
+          <p class="login-note">Click the username box to show your username and password near the field.</p>
+          <div class="form-actions">
+            <button type="submit">Login</button>
+          </div>
+          <p id="loginStatus" class="status-text"></p>
+        </form>
+      </div>
+      <div id="registerFormContainer" class="hidden">
+        <form id="registerForm" autocomplete="off">
+          <div class="form-row">
+            <label for="registerUsername">Choose username</label>
+            <input type="text" id="registerUsername" placeholder="Enter a new username" required />
+          </div>
+          <div class="form-row">
+            <label for="registerPassword">Choose password</label>
+            <input type="password" id="registerPassword" placeholder="Enter a new password" required />
+          </div>
+          <div class="form-row">
+            <label for="registerConfirmPassword">Confirm password</label>
+            <input type="password" id="registerConfirmPassword" placeholder="Confirm password" required />
+          </div>
+          <p class="login-note">Use a secure password; this account can sign in immediately after creation.</p>
+          <div class="form-actions">
+            <button type="submit">Create Account</button>
+          </div>
+          <p id="registerStatus" class="status-text"></p>
+        </form>
+      </div>
+    </section>
+  </section>
+
+  <!-- INTERFACE 2: MEMBER FORM INTERFACE -->
+  <main class="interface hidden" id="interface2Form">
+    <section class="panel form-header-panel">
+      <div class="form-title">
+        <h2>Add/Edit Member Information</h2>
+        <p>Fill in the member details and submit the form</p>
+      </div>
+      <div class="interface-nav">
+        <button type="button" id="goToDashboardBtn" class="button-secondary">View Members Dashboard</button>
+        <button type="button" id="logoutFromFormBtn" class="button-secondary">Logout</button>
+      </div>
+    </section>
+
+    <section class="panel form-panel">
+      <div class="member-form-grid">
+        <div class="form-left">
+          <form id="memberForm" autocomplete="off">
+            <div class="form-row">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" placeholder="Enter full name" required />
+            </div>
+            <div class="form-row">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="Enter email address" />
+            </div>
+            <div class="form-row">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" placeholder="Enter phone number" />
+            </div>
+            <div class="form-row split">
+              <div>
+                <label for="age">Age</label>
+                <input type="number" id="age" min="1" max="120" placeholder="Age" />
+              </div>
+              <div>
+                <label for="gender">Gender</label>
+                <select id="gender">
+                  <option value="">Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="role">Role</label>
+              <select id="role" required>
+                <option value="">Choose role</option>
+                <option value="Member">Member</option>
+                <option value="Volunteer">Volunteer</option>
+                <option value="Staff">Staff</option>
+                <option value="Elder">Elder</option>
+                <option value="Deacon">Deacon</option>
+              </select>
+            </div>
+            <div class="form-row split">
+              <div>
+                <label for="baptized">Baptized</label>
+                <select id="baptized">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+              </div>
+              <div>
+                <label for="membershipStatus">Membership Status</label>
+                <select id="membershipStatus">
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                  <option value="Prospective">Prospective</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="address">Address</label>
+              <textarea id="address" rows="2" placeholder="Enter address"></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" id="saveButton">Save Member</button>
+              <button type="button" id="clearButton" class="button-secondary">Clear Form</button>
+            </div>
+            <input type="hidden" id="memberId" />
+          </form>
+        </div>
+        <aside class="photo-panel">
+          <div class="photo-frame">
+            <span id="photoPlaceholder">No photo selected</span>
+            <img id="memberPhotoPreview" alt="Member photo preview" />
+          </div>
+          <div class="form-row">
+            <label for="photoUpload">Upload Photo</label>
+            <input type="file" id="photoUpload" accept="image/*" />
+          </div>
+          <p class="photo-guide">This small dashboard keeps the member photo visible while editing their profile.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- INTERFACE 3: MEMBERS DASHBOARD INTERFACE -->
+  <main class="interface hidden" id="interface3Dashboard">
+    <section class="panel dashboard-header">
+      <img id="dashboardLogo" src="logo.svg" alt="Christ Center Of Praise logo" />
+      <div class="form-title">
+        <h2>Members Dashboard</h2>
+        <p>View and manage all church members</p>
+      </div>
+      <div class="interface-nav">
+        <button type="button" id="goToFormBtn" class="button-primary">+ Add New Member</button>
+        <button type="button" id="logoutFromDashboardBtn" class="button-secondary">Logout</button>
+      </div>
+    </section>
+
+    <section class="panel toolbar-panel">
+      <div class="toolbar">
+        <div>
+          <label for="searchText">Search</label>
+          <input type="search" id="searchText" placeholder="Search name, email, role" />
+        </div>
+        <div>
+          <label for="filterRole">Filter by Role</label>
+          <select id="filterRole">
+            <option value="">All roles</option>
+            <option value="Member">Member</option>
+            <option value="Volunteer">Volunteer</option>
+            <option value="Staff">Staff</option>
+            <option value="Elder">Elder</option>
+            <option value="Deacon">Deacon</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="table-wrap">
+        <table id="memberTable">
+          <caption>Member Records</caption>
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>Full Name</th>
+              <th>Role</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Baptized</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Records populate here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built for church member management with local browser storage.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
